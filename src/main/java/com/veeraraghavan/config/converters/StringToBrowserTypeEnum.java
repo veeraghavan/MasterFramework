@@ -6,9 +6,9 @@ import org.aeonbits.owner.Converter;
 import java.lang.reflect.Method;
 import java.util.Map;
 
-public class StringToBrowserTypeEnum implements Converter {
+public class StringToBrowserTypeEnum implements Converter<BrowserTypeEnums> {
     @Override
-    public Object convert(Method method, String browserType) {
+    public BrowserTypeEnums convert(Method method, String browserType) {
         Map<String, BrowserTypeEnums> browserTypeEnumsMap = Map.of("CHROME", BrowserTypeEnums.CHROME,
                 "FIREFOX", BrowserTypeEnums.FIREFOX);
         return browserTypeEnumsMap.getOrDefault(browserType.toUpperCase(), BrowserTypeEnums.CHROME);

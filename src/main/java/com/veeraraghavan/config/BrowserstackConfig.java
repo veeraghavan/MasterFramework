@@ -15,22 +15,17 @@ import java.net.URL;
 @Config.Sources({
         "system:properties",
         "system:env",
-        "file:${user.dir}/src/test/resources/config.properties"
+        "file:${user.dir}/src/test/resources/browserstack.properties"
 })
-public interface FrameworkConfig extends Config {
+public interface BrowserstackConfig extends Config {
 
-    @ConverterClass(StringToBrowserTypeEnum.class)
-    BrowserTypeEnums browser();
+    @Key("username")
+    String userName();
 
-    @ConverterClass(StringToRunModeEnums.class)
-    RunModeEnums runMode();
+    @Key("accessKey")
+    String key();
 
-    @ConverterClass(StringToRemotePlatformEnums.class)
-    RemotePlatformEnums remotePlatform();
-
+    @DefaultValue("https://${userName}:${key}@hub-cloud.browserstack.com/wd/hub")
     @ConverterClass(StringToURLConverter.class)
-    URL seleniumGridUrl();
-
-    @ConverterClass(StringToURLConverter.class)
-    URL selenoidUrl();
+    URL browserstackURL();
 }
